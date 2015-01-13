@@ -3,6 +3,7 @@ from sqlalchemy import (
     Index,
     Integer,
     Text,
+    Unicode,
     )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -23,5 +24,12 @@ class MyModel(Base):
     id = Column(Integer, primary_key=True)
     name = Column(Text)
     value = Column(Integer)
+
+class Entry(Base):
+    __tablename__ = 'entries'
+    id = Column(Integer, primary_key=True)
+    title = Column(Unicode(255), unique=True, nullable=False)
+    body = Column(Unicode, unique=True, nullable=False)
+    created = Column(Integer(
 
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
