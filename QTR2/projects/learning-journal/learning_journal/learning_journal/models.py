@@ -1,3 +1,4 @@
+import datetime
 from sqlalchemy import (
     Column,
     Index,
@@ -23,7 +24,8 @@ Base = declarative_base()
 class MyModel(Base):
     __tablename__ = 'models'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
+    #name = Column(Text)
+    name = Column(Unicode)
     value = Column(Integer)
 
 class Entry(Base):
@@ -32,14 +34,16 @@ class Entry(Base):
     title = Column(Unicode(255), unique=True, nullable=False)
     body = Column(Unicode, unique=True, nullable=False)
     
+    #created = Column(DateTime, default=datetime.datetime.now)
+    created = Column(DateTime, default=datetime.datetime.now)
+
     #Fix These
 
-    #created = Column(DateTime, default=datetime.datetime.now)
     #edited = Column(DateTime, default=datetime.datetime.now)
 
-    #@classmethod
-    #def by_id(self, id):
-    #    return 
+    @classmethod
+    def by_id(self, id):
+        return session.query(Entry).order_by(Entry.created)
 
     # }
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
