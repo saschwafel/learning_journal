@@ -37,12 +37,15 @@ class Entry(Base):
     #created = Column(DateTime, default=datetime.datetime.now)
     created = Column(DateTime, default=datetime.datetime.now)
 
-    #Fix These
-
     #edited = Column(DateTime, default=datetime.datetime.now)
 
+    #Fix These
+
+
     @classmethod
-    def by_id(self, id):
+    def by_id(self):
+        if session is None:
+            session = DBSession
         return session.query(Entry).order_by(Entry.created)
 
     # }
