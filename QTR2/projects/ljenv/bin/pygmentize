@@ -1,0 +1,10 @@
+#!/home/sschwafel/Class/WebProgrammingInPython/QTR2/projects/ljenv/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'Pygments==2.0.1','console_scripts','pygmentize'
+__requires__ = 'Pygments==2.0.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('Pygments==2.0.1', 'console_scripts', 'pygmentize')()
+    )
