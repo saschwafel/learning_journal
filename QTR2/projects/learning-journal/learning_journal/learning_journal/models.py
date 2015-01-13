@@ -4,6 +4,7 @@ from sqlalchemy import (
     Integer,
     Text,
     Unicode,
+    DateTime,
     )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -30,6 +31,15 @@ class Entry(Base):
     id = Column(Integer, primary_key=True)
     title = Column(Unicode(255), unique=True, nullable=False)
     body = Column(Unicode, unique=True, nullable=False)
-    created = Column(Integer(
+    
+    #Fix These
 
+    #created = Column(DateTime, default=datetime.datetime.now)
+    #edited = Column(DateTime, default=datetime.datetime.now)
+
+    #@classmethod
+    #def by_id(self, id):
+    #    return 
+
+    # }
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
