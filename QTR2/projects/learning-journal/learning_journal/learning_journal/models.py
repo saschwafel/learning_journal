@@ -16,6 +16,8 @@ from sqlalchemy.orm import (
     )
 
 from zope.sqlalchemy import ZopeTransactionExtension
+import sqlalchemy as sa
+from sqlalchemy.ext.declarative import declarative_base
 
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
@@ -37,16 +39,27 @@ class Entry(Base):
     #created = Column(DateTime, default=datetime.datetime.now)
     created = Column(DateTime, default=datetime.datetime.now)
 
-    #edited = Column(DateTime, default=datetime.datetime.now)
+    edited = Column(DateTime, default=datetime.datetime.now)
 
     #Fix These
 
 
     @classmethod
-    def by_id(self):
-        if session is None:
-            session = DBSession
-        return session.query(Entry).order_by(Entry.created)
+    def all(cls, session=None):
+	if session is None:
+	    session = DBSession
+#Mine
+
+        #return session.query(cls).all().order_by(cls.created)
+
+#Cris's
+	return DBSession.query(cls).order_by(sa.desc(cls.created)).all()
+    
+    @classmethod
+    def by_id(cls, id, session=None):
+	if session is None:
+	    session = DBSession
+        return session.query(cls).get(id)
 
     # }
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
