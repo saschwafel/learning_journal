@@ -22,7 +22,7 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.add_route('detail', '/journal/{id:\d+}')
     config.add_route('action', '/journal/{action}')
-    config.add_route('edit', '/journal/{id:\d+}/edit')
+    #config.add_route('edit', '/journal/{id:\d+}/edit')
 
     config.scan()
     return config.make_wsgi_app()

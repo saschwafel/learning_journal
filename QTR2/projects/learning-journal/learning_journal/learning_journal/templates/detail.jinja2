@@ -8,7 +8,11 @@
 
 <p>Created <strong title="{{entry.created}}">{{entry.created}}</strong></p>
 
-<li><a href="{{ request.route_url('detail') }}">Edit</a></li>
+#<li><a href="{{ request.route_url('detail') }}">Edit</a></li>
+#<p><a href="{{ request.route_url('action', action='edit') }}">Edit</a></p>
+
+<a href="${request.route_url('action', action='edit', _query=(('id',entry.id),))}">Edit Entry</a>
+
 
 </article>
 {% endblock %}
