@@ -1,0 +1,29 @@
+<form action="${request.route_url('blog_action',action=action)}" method="post">
+%if action =='edit':
+
+${form.id()}
+%endif%
+
+<div><label>${form.title.label}</label>${form.title()}</div>
+
+% for error in form.body.errors:
+<div class="error">${error}</div>
+% endfor
+
+<div><label>${form.body.label}</label>${form.body()}</div>
+<div><input type="submit" value="Submit"></div>
+</form>
+<p><a href="${request.route_url('home')}">Go Back</a></p>
+
+{% for field in form %}
+  {% if field.errors %}
+    <ul>
+    {% for error in field.errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+    <p>{{ field.label }}: {{ field }}</p>
+{% endfor %}
+    <p><input type="submit" name="submit" value="Submit" /></p>
+</form>

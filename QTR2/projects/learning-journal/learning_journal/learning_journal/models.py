@@ -57,9 +57,30 @@ class Entry(Base):
     
     @classmethod
     def by_id(cls, id, session=None):
-	if session is None:
-	    session = DBSession
+        """return a single entry identified by id
+        If no entry exists with the provided id, return None
+        """
+        if session is None:
+            session = DBSession
         return session.query(cls).get(id)
 
+
+#    @classmethod
+#    def by_id(cls, id, session=None):
+#	if session is None:
+#	    session = DBSession
+#        return session.query(cls).get(id)
+
     # }
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(Unicode(255), unique=True, nullable=False)
+    password = Column(Unicode(255), nullable=False)
+
+    @classmethod
+    def by_name(cls, name):
+        return DBSession.query(User).filter(User.name == name).first()
+
 Index('my_index', MyModel.name, unique=True, mysql_length=255)

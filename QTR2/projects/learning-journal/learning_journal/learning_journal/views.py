@@ -2,7 +2,8 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.exceptions import HTTPNotFound
 from pyramid.httpexceptions import HTTPFound
-from .forms import EntryCreateForm
+from .forms import EntryCreateForm, EntryEditForm
+
 
 from sqlalchemy.exc import DBAPIError
 
@@ -39,11 +40,22 @@ def edit(request):
     entry = Entry.by_id(id)
     if not entry:
         return HTTPNotFound()
+#Cris's
     form = EntryEditForm(request.POST, entry)
     if request.method == 'POST' and form.validate():
         form.populate_obj(entry)
         return HTTPFound(location=request.route_url('detail', id=entry.id))
-    return {'form':form, 'action':request.matchdict.get('action')}
+    return {'form': form, 'action': request.matchdict.get('action')}
+
+
+
+#Mine
+
+#    form = EntryEditForm(request.POST, entry)
+#    if request.method == 'POST' and form.validate():
+#        form.populate_obj(entry)
+#        return HTTPFound(location=request.route_url('detail', id=entry.id))
+#    return {'form':form, 'action':request.matchdict.get('action')}
 
 @view_config(route_name='action', match_param='action=create',renderer='templates/edit.jinja2')
 def create(request):
