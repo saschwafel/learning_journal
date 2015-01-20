@@ -6,9 +6,10 @@ body{
 header{
     margin:0;
     padding:0 0.75em;
-    width:100%;
+    width:15%;
     background: #222;
-    color: #ccc;
+    /*color: #ccc;*/
+    color: #c7c7c7;
     border-bottom: 3px solid #fff;}
 header:after{
     content:"";
@@ -26,8 +27,8 @@ footer a:visited {
     color:#eee;
 }
 header aside{
-    float:right;
-    text-align:right;
+    float:center;
+    text-align:center;
     padding-right:0.75em}
 header ul{
     list-style:none;
@@ -49,7 +50,8 @@ main article{
 main article h3{margin-top:0}
 main article .entry_body{
     margin:0.5em}
-main aside{float:right}
+/*main aside{float:right}*/
+main aside{float:center}
 main aside .field{
     margin-bottom:1em}
 main aside .field input,
@@ -68,6 +70,7 @@ main aside .control_row input{
 footer{
     padding: 1em 0.75em;
     background: #222;
+    width:15%;
     color: #ccc;
     border-top: 3px solid #fff;
     border-bottom: 3px solid #fff;}
