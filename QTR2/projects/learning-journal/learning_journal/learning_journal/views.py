@@ -42,7 +42,7 @@ def edit(request):
     form = EntryEditForm(request.POST, entry)
     if request.method == 'POST' and form.validate():
         form.populate_obj(entry)
-        return HTTPFound(location=request.route_url('edit', id=entry.id))
+        return HTTPFound(location=request.route_url('detail', id=entry.id))
     return {'form':form, 'action':request.matchdict.get('action')}
 
 @view_config(route_name='action', match_param='action=create',renderer='templates/edit.jinja2')
