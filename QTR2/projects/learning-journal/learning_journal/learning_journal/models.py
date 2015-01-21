@@ -1,4 +1,5 @@
 import datetime
+from cryptacular.bcrypt import BCRYPTPasswordManager as Manager
 from sqlalchemy import (
     Column,
     Index,
@@ -79,6 +80,10 @@ class User(Base):
     name = Column(Unicode(255), unique=True, nullable=False)
     password = Column(Unicode(255), nullable=False)
 
+    def verify_password(self, password):
+        manager = Manager()
+        return manager.check(self.password, password)
+    
     @classmethod
     def by_name(cls, name):
         return DBSession.query(User).filter(cls.name == name).first()

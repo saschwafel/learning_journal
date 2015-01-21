@@ -28,12 +28,12 @@ def view(request):
     return {'entry': entry}
 
 
-#@view_config(route_name='action', match_param='action=create', renderer='string')
+#mview_config(route_name='action', match_param='action=create', renderer='string')
 #def create(request):
 #    return 'create page'
 
 
-@view_config(route_name='action', match_param='action=edit', renderer='templates/edit.jinja2')
+@view_config(route_name='action', match_param='action=edit', renderer='templates/edit.jinja2', permission='create')
 def edit(request):
     id = int(request.params.get('id', -1))
 
@@ -57,7 +57,7 @@ def edit(request):
 #        return HTTPFound(location=request.route_url('detail', id=entry.id))
 #    return {'form':form, 'action':request.matchdict.get('action')}
 
-@view_config(route_name='action', match_param='action=create',renderer='templates/edit.jinja2')
+@view_config(route_name='action', match_param='action=create',renderer='templates/edit.jinja2', permission='create')
 def create(request):
     entry = Entry()
     form = EntryCreateForm(request.POST)

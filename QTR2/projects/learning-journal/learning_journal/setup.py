@@ -9,16 +9,17 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
-    'pyramid',
     #'pyramid_chameleon',
-    'pyramid_jinja2',
-    'pyramid_debugtoolbar',
-    'pyramid_tm',
     'SQLAlchemy',
+    'cryptacular',
+    'pyramid',
+    'pyramid_debugtoolbar',
+    'pyramid_jinja2',
+    'pyramid_tm',
     'transaction',
-    'zope.sqlalchemy',
     'waitress',
     'wtforms',
+    'zope.sqlalchemy',
     ]
 
 setup(name='learning_journal',
