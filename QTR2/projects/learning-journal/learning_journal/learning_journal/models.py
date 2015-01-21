@@ -81,6 +81,6 @@ class User(Base):
 
     @classmethod
     def by_name(cls, name):
-        return DBSession.query(User).filter(User.name == name).first()
+        return DBSession.query(User).filter(cls.name == name).first()
 
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
