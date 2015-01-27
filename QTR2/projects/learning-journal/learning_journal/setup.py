@@ -12,6 +12,7 @@ requires = [
     #'pyramid_chameleon',
     'SQLAlchemy',
     'cryptacular',
+    'markdown',
     'pyramid',
     'pyramid_debugtoolbar',
     'pyramid_jinja2',
