@@ -41,7 +41,7 @@ def main(argv=sys.argv):
     Base.metadata.create_all(engine)
     with transaction.manager:
         manager = Manager()
-        passowrd = os.environ.get('ADMIN_PASSWORD', u'admin')
+        password = os.environ.get('ADMIN_PASSWORD', u'admin')
         password = manager.encode(password)
         #password = manager.encode(u'admin')
         #admin = User(name=u'admin', password=password)
