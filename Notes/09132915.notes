@@ -1,0 +1,95 @@
+Notes for Jan 13, 2015
+========================
+
+
+   What's special about a classmethod?
+        Gets the class object as the first argument
+
+        def fun(----> cls <----, etc.) 
+
+        receives the class object as its first argument
+
+    
+    Dynamic systems -> software builds and HTML file and sends it back to you
+    straight out of memory
+
+    What's the role for a path when there's isn't an actual file system
+
+    Most web frameworks now call the path a route
+
+    They provide a way of matching routes to the code that will be run to handle
+    requests
+
+
+    Our code template created a sample route for us, using the add_route method
+    of the Configurator class
+
+    add_route method has two required arguments: a name and a pattern 
+
+    In our sample route the name is home
+
+    When a request comes into Pyramid, it looks at the routes and tries to make
+    a match
+
+    As soon as one of those patterns matches, that route is used and no further
+    matching is performed
+
+    If no route is found, that matches, then the request will get a 404
+
+	Any request for the root (/) will be found (currently)
+
+
+    In a pattern, you can capture a path segment replacement marker, a valid
+    python symbol surrounded by curly braces
+
+	/home/{foo}/
+
+
+    matched segments are captured in a matchdict
+
+
+    In pyramid, a route is connected by configuration to a view
+
+    In our app, a sample view has been created for us, in views.py
+
+
+    The order in which views are connected to routes is not important, so the
+    declarative @view_config decorator can be used
+
+    When config.scan is called, all files in our application are searched for
+    such declarative configuration and it is added
+
+    
+    Configuration connected that route to a view in our application. 
+
+    Now, the view that was connected will be called, which brings us to the
+    nature of views
+
+	--a Pyramid view is callable that takes request as an argument
+
+    So, a view is a callable that takes the request as an argument!
+
+	It can then use information from the request to build appropriate data
+	(with models)
+
+	Then it returns the data it assembled, passing it onto a renderer
+
+	Which renderer to use is determined, again, by configuration
+
+	The view stands at the intersection of input data, the application
+	model, and the renderers that offer rendering <----THE CONTROLLER!!!
+
+
+    Controllers = views, they are callables that take requests as arguments
+
+
+    The built-in renderers (string, json, jsonp) in Pyramid are not the only
+    ones available
+
+    There are add-ons to Pyramid that support various template languages
+
+    Chameleon is a powerful/difficult template language
+
+
+
+

@@ -1,0 +1,61 @@
+January 20th Notes
+==================
+
+   AuthN and AuthZ
+
+        AuthN = Authentication -> verification of the identity of a principal
+
+    AuthZ = Authorization -> Enumeration of the rights of that principal in a context
+
+    Think of them as "who am I" and "what can I do?" 
+
+    All systems with access control involve both those aspects. Most wire them together as one. 
+    
+    In Pyramid, these are two separate things:
+
+        config.set_authentication_policy(AuthnPolicy())
+        config.set_authorization_policy(AuthzPolicy())
+    
+    If you set one, you must set the other. 
+
+    Pyramid comes with a few policy classes included. You can roll your own, so long as they fulfill the required interface. 
+
+    Two built-in policies
+
+    AuthTktAuthenticationPolicy: sets an expirable authentication ticket cookie
+
+    ACLAuthorizationPolicy: uses an access control list to grant permissions to principals
+
+    Our access control system will have the following properties:
+
+        Everyone can view entries and the list of all entries
+
+        Users who log in may edit entries or create new ones
+
+    We enable it through configuration
+
+
+    Pyramid relies on a concept it calls "context" for authorization
+
+    A principal can be granted rights in a particular CONTEXT
+
+    Context can be made as specific as one single object
+    
+    Or it can be generalized as a route or a view
+
+    To have context, we need a Python object called a factory that returns a something with an __acl__ attribute
+        
+        The framework uses this object to determine what permissions you as a principal receive
+    
+        
+    Python provides a number of libraries for providing strong encryption. 
+
+        Use a well-known encryption library!
+    
+        We are going to use Cryptacular
+
+            Provides a couple of algorithms and a password manage
+
+    
+
+    
