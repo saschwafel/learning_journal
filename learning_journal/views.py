@@ -84,8 +84,7 @@ def create(request):
 #    return {'one': one, 'project': 'learning_journal'}
 
 @view_config(route_name='auth', match_param='action=in', renderer='string', request_method='POST')
-@view_config(route_name='auth', match_param='action=out' renderer='string')
-
+@view_config(route_name='auth', match_param='action=out', renderer='string')
 def sign_in_out(request):
     login_form=None
     if request.method == 'POST':
