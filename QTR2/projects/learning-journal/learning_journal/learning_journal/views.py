@@ -2,7 +2,9 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.exceptions import HTTPNotFound
 from pyramid.httpexceptions import HTTPFound
-from .forms import EntryCreateForm, EntryEditForm
+from .forms import EntryCreateForm, EntryEditForm, LoginForm
+from pyramid.security import forget, remember, authenticated_userid
+from .models import User
 
 
 from sqlalchemy.exc import DBAPIError
@@ -16,7 +18,11 @@ from .models import (
 @view_config(route_name='home', renderer='templates/list.jinja2')
 def index_page(request):
     entries = Entry.all()
-    return {'entries':entries}
+    form = None
+    if not authenticated_userid(request):
+        form = LoginForm()
+
+    return {'entries':entries, 'login_form': form}
 
 
 @view_config(route_name='detail', renderer='templates/detail.jinja2')
@@ -77,6 +83,21 @@ def create(request):
 #        return Response(conn_err_msg, content_type='text/plain', status_int=500)
 #    return {'one': one, 'project': 'learning_journal'}
 
+@view_config(route_name='auth', match_param='action=in', renderer='string', request_method='POST')
+def sign_in(request):
+    login_form=None
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
+    if login_form and login_form.validate():
+        user = User.by_name(login_form.username.data)
+        if user and user.verify_password(login_form.password.data):
+            headers = remember(request, user.name)
+        else:
+            headers = forget(request)
+    else:
+        headers = forget(request)
+
+    return HTTPFound(location=request.route.url('home'), headers=headers)
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
