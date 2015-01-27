@@ -23,9 +23,7 @@ def index_page(request):
     form = None
     if not authenticated_userid(request):
         form = LoginForm()
-
-    return {'entries':entries, 'login_form': form}
-
+    return {'entries': entries, 'login_form': form}
 
 @view_config(route_name='detail', renderer='templates/detail.jinja2')
 def view(request):
