@@ -97,7 +97,7 @@ def sign_in(request):
     else:
         headers = forget(request)
 
-    return HTTPFound(location=request.route.url('home'), headers=headers)
+    return HTTPFound(location=request.route_url('home'), headers=headers)
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
