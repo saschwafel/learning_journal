@@ -1,4 +1,3 @@
-
 {% extends "layout.jinja2" %}
 {% block body %}
 {% if login_form %}
@@ -32,3 +31,4 @@
 {% endif %}
 <p><a href="{{ request.route_url('action', action='create') }}">New Entry</a></p>
 {% endblock %}
+

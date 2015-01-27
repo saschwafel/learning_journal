@@ -5,6 +5,8 @@ from pyramid.httpexceptions import HTTPFound
 from .forms import EntryCreateForm, EntryEditForm, LoginForm
 from pyramid.security import forget, remember, authenticated_userid
 from .models import User
+from jinja2 import Markup
+import markdown
 
 
 from sqlalchemy.exc import DBAPIError
@@ -31,7 +33,8 @@ def view(request):
     entry = Entry.by_id(this_id)
     if not entry: 
         return HTTPNotFound()
-    return {'entry': entry}
+    logged_in = authenticated_userid(request)
+    return {'entry': entry, 'logged_in': logged_in}
 
 
 #mview_config(route_name='action', match_param='action=create', renderer='string')
@@ -99,6 +102,10 @@ def sign_in_out(request):
         headers = forget(request)
 
     return HTTPFound(location=request.route_url('home'), headers=headers)
+
+def render_markdown(content):
+    output = Markup(markdown.markdown(content))
+    return output
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
